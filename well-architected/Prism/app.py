@@ -183,6 +183,12 @@ app = dash.Dash(
     external_stylesheets=[dbc.themes.BOOTSTRAP],
     suppress_callback_exceptions=True,
     title="Amazon DocumentDB Prism",
+    # Disable Dash's default behaviour of swapping the browser tab title to
+    # "Updating..." whenever a callback runs. This app polls continuously
+    # (progress 400ms, snapshot 800ms, lazy-load 2s, agent 6s), so the default
+    # made the tab title flicker between the name and "Updating..." nonstop.
+    # None fully disables the swap so the static title stays put during callbacks.
+    update_title=None,
 )
 server = app.server
 
